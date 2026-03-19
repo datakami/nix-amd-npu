@@ -2,6 +2,10 @@
 {
   perSystem = { config, pkgs, system, ... }:
     let
+      amdxdna-driver = pkgs.callPackage ../pkgs/amdxdna-driver {
+        kernel = pkgs.linuxPackages_6_18.kernel;
+      };
+
       xrt = pkgs.callPackage ../pkgs/xrt { };
 
       xrt-plugin-amdxdna = pkgs.callPackage ../pkgs/xrt-plugin-amdxdna {
@@ -97,7 +101,7 @@
     {
       packages = {
         # Free/open-source packages (built from source)
-        inherit xrt xrt-plugin-amdxdna xrt-amdxdna unilog xir target-factory vart trace-logging graph-engine xaiengine dynamic-dispatch onnxruntime-vitisai python-onnxruntime-vitisai mlir-aie whisper-iron fastflowlm;
+        inherit amdxdna-driver xrt xrt-plugin-amdxdna xrt-amdxdna unilog xir target-factory vart trace-logging graph-engine xaiengine dynamic-dispatch onnxruntime-vitisai python-onnxruntime-vitisai mlir-aie whisper-iron fastflowlm;
         default = xrt-amdxdna;
       };
 
