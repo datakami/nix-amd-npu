@@ -69,6 +69,11 @@
         whisper-iron = final.callPackage ./pkgs/whisper-iron {
           inherit (final) mlir-aie xrt-amdxdna;
         };
+
+        # FastFlowLM NPU-optimized LLM runtime
+        fastflowlm = final.callPackage ./pkgs/fastflowlm {
+          inherit (final) xrt;
+        };
       };
 
       perSystem = { system, ... }: {
